@@ -1,0 +1,21 @@
+{
+  "/api/*": "/$1",
+  "/favorites":"/favorites",
+  "/movie/latest": "/movies-latest",
+  "/movie/popular": "/movies-popular",
+  "/movie/popular/:id": "/movies-popular/:id",
+  "/movie/top_rated": "/movies-toprated",
+  "/movie/most_watched": "/movies-most-watched",
+  "/movie/cults": "/movies-cults",
+  "/movie/trending": "/trending",
+  "/tv/series": "/tv-series",
+  "/reset": "/reset",
+  "favorites":660,
+  "movies-latest":660,
+  "movies-popular": 660,
+  "movies-toprated": 660,
+  "movies-most-watched":660,
+  "movies-cults":660,
+  "trending":660,
+  "tv-series":660
+}

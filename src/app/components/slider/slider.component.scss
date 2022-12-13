@@ -1,0 +1,121 @@
+h2 {
+    color:#e5e5e5;
+    font-size: x-large;
+}
+
+.slider {
+    &-wrap {
+        position: relative;
+        overflow: hidden;
+        height: 184px;
+    }
+    &-main {
+        position:absolute;
+        width: 200%;
+    }
+    &-item {
+        display:inline-block;
+        width: 123px;
+        background-color: var(--fireRed);
+        position:relative;
+        margin: 0 12px 0 0;
+    }
+}
+
+.poster {
+    height:100%;
+}
+
+.item {
+    float: left;
+    list-style: none;
+    padding: 0;  
+    margin: 0 50px 0 0;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 3px 0 #333;
+    &:hover {
+        transform: scale(1.25);
+    }
+}
+
+.previous, .next, .previous:before, .next:before {
+    width: 30px;
+    height: 184px;
+    position: absolute;
+}
+
+.previous:before, .next:before {
+    content: "";
+    opacity: 0.5;
+    background: url(../../../assets/img/arrows.png) #666 no-repeat;
+    background-size: 150%;
+}
+
+.previous:before {
+    background-position: 5px center;
+}
+
+.next:before {
+    background-position: -19px center;
+}
+
+.previous:hover:before, .next:hover:before {
+    opacity: 0.8;
+}
+
+.previous, .previous:before {
+    left: 0;
+}
+
+.next, .next:before {
+    right: 0;
+}
+
+@media screen and (min-width:576px) {
+    .slider-item {
+        margin: 0 7px 0 0;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .slider-item {
+        margin: 0 15px 0 0;
+        width: 129px;
+    }
+
+    .fa-heart {
+        top: -36px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .slider {
+        &-wrap, .previous, .next, .previous:before, .next:before {
+            height: 212px;
+        }
+        &-item {
+            width: 142px;
+        }
+    }
+
+    .fa-heart {
+        top: -28px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .slider {
+        &-wrap, .previous, .next, .previous:before, .next:before {
+            height: 262px;
+        }
+        &-item {
+            margin: 0 17px 0 0;
+            width: 176px;
+        }
+    }
+    
+    .fa-heart {
+        top: -35px;
+        font-size: 30px;
+    }
+}

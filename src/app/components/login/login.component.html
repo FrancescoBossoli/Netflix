@@ -1,0 +1,35 @@
+<section class="login">
+    <form class="text-white mx-auto" #loginForm="ngForm" (ngSubmit)="onsubmit()">
+        <h1 class="fs-2 mb-4">Accedi</h1>
+        <div class="form-group mb-3 w-100">
+            <input name="email" type="email" [class.is-invalid]="emailRef.invalid && emailRef.touched" [(ngModel)]="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailRef="ngModel" required>
+            <label>Email</label>
+            <div *ngIf="(emailRef.invalid && emailRef.touched) || emailRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+                <small class="text-warning text-center" *ngIf="!this.email">Il campo email è obbligatorio</small>
+                <small class="text-warning text-center" *ngIf="emailRef.errors?.['pattern']">L'email non risulta formalmente corretta</small>
+            </div>
+        </div>
+        <div class="form-group mb-3 w-100">
+            <input ngModel name="password" type="password" [class.is-invalid] = "pswRef.invalid && pswRef.touched" [(ngModel)]="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" #pswRef="ngModel" required>
+            <label>Password</label>
+            <div *ngIf="(pswRef.invalid && pswRef.touched) || pswRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+                <small class="text-warning text-center" *ngIf="!this.password">Il campo password è obbligatorio</small>
+                <small class="text-warning text-center" *ngIf="pswRef.errors?.['pattern']">La password deve contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale</small>
+            </div>
+        </div>
+        <button type="submit" class="btn w-100 text-white d-flex justify-content-center align-items-center">Accedi</button>
+        <div class="remember">
+            <div class="left">
+                <input type="checkbox" id="remember" class="px-1 me-1">
+                <label for="remember">Ricordami</label>
+            </div>
+            <div class="right">
+                <a>Serve aiuto?</a>   <!---->
+            </div>
+        </div>
+        <div class="signup">
+            <p>Prima volta su Netflix? <a [routerLink]="['/signup']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="text-white">Registrati</a>.</p>
+        </div>
+        <p class="captcha">Questa pagina è protetta da Google reCAPTCHA per garantire che tu non sia un bot. <a class="text-primary">Scopri di più.</a></p><!---->
+    </form>
+</section>

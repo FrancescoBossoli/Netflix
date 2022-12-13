@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+:root {
+    --lightColor01: #737373;
+    --lightColor02: #8c8c8c;
+    --alertColor: #e87c03;
+    --fireRed: #e50914;
+    --bgDark: #00000099;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.fa-regular {
+    font-family: "Font Awesome 6 Free";
+}
+
+.btn, .btn:hover {
+    background-color: var(--fireRed);
+    border-radius: 4px;
+}
+

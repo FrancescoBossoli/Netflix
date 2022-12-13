@@ -1,0 +1,6 @@
+<!-- cambiare link --> <!--href="item.html?media_type=movie&id=299536"-->
+<a [routerLink]="['/'+type+'/'+ watchable.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="passWatchable()">    
+    <img class="poster w-100" src="https://image.tmdb.org/t/p/w200{{watchable.poster_path}}" alt="{{watchable.title}}">
+    
+</a>
+<i class="fa-solid fa-heart" (click)="favouriteChange()" [class.text-danger]="red" [class.text-white]="white" [class.opacity-50]="white" #heart></i>

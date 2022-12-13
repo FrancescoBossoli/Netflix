@@ -1,0 +1,31 @@
+<section class="profile">
+    <div class="profile-container px-4">
+        <div class="title d-flex flex-row justify-content-between align-items-baseline">
+            <h2 class="text-white fw-light pt-5">Account</h2>
+            <p *ngIf="loggedUser!=null">Ciao {{loggedUser.user.name}} {{loggedUser.user.surname}}</p>
+        </div>
+        
+        <hr class="text-white">
+        <div class="container-fluid py-2">
+            <div class="row d-flex flex-column flex-md-row px-0">
+                <div class="profile-section-title p-0">
+                    <h3 class="fs-6">ABBONAMENTO E FATTURAZIONE</h3>
+                    <button (click)="deleteAccount()" class="p-2 rounded-2">Disdici Abbonamento</button>
+                </div>
+                <div class="profile-section-info p-0 d-flex flex-row justify-content-between align-items-center">
+                    <div class="input-fields d-flex flex-column justify-content-start col-6">
+                        <input class="text-white bg-transparent border-0" type="email" name="email" id="email" #email
+                            readonly>
+                        <p class="text-danger d-none" #instruction>Inserisci la password per continuare</p>
+                        <input class="text-white bg-transparent border-0" type="password" name="password" id="password" #password readonly>
+                    </div>
+                    <div class="button-fields d-flex flex-column justify-content-end col-6">
+                        <button class="text-end bg-transparent border-0 text-primary" #edit
+                            (click)="editEmail()">Modifica email Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

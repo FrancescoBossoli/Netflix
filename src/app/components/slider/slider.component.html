@@ -1,0 +1,17 @@
+<h2 class="fs-3 ms-2 mb-2 mt-3">{{title}}</h2>
+
+<div class="slider p-0">
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="slider-wrap w-100">
+            <div class="slider-main">
+                <div class="slider-item" *ngFor="let w of watchables">
+                    <app-poster [watchable]="w" [loggedUser]="loggedUser" [type]="type"></app-poster>                    
+                </div>
+            </div>            
+        </div>
+        <div class="button-area">
+            <a type="button" class="previous" appPrevious></a>
+            <a type="button" class="next" appNext></a>
+        </div>
+    </div>
+</div>

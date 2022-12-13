@@ -1,0 +1,30 @@
+<section #top class="watchable" [ngStyle]="{'background-image': 'url('+ backgroundPath + watchable.backdrop_path +'), linear-gradient(#000000cc,#00000050)'}">
+    <div class="watchable-container container-fluid d-flex flex-column flex-md-row justify-content-center px-3">
+        <div class="watchable-poster-container rounded mx-auto mb-3">
+            <div class="watchable-poster rounded" [ngStyle]="{'background-image': 'url('+ backgroundPath + watchable.poster_path +'), linear-gradient(#000000cc,#00000050)'}">            
+            </div>
+        </div>        
+        <div class="watchable-infos bg-dark ms-md-3 opacity-75 rounded mx-auto">
+            <h1 [textContent]="watchable.title" class="text-white px-3 pt-3 m-0"></h1>
+            <div class="d-flex justify-content-start">
+                <div class="comp-rate d-flex flex-row-reverse align-items-center px-3">
+                    <div><span class="score"></span></div>
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="(watchable.vote_average >= 9) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 8 && (watchable.vote_average < 9) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 7 && (watchable.vote_average < 8) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 6 && (watchable.vote_average < 7) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 5 && (watchable.vote_average < 6) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 4 && (watchable.vote_average < 5) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 3 && (watchable.vote_average < 4) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 2 && (watchable.vote_average < 3) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average >= 1 && (watchable.vote_average < 2) ? true:false">
+                    <input type="radio" class="rate m-0 border-0" name="rate" [checked]="watchable.vote_average > 0 && (watchable.vote_average < 1) ? true:false">
+                </div>
+            </div>
+            <div class="px-3 d-flex flex-row">
+                <div *ngFor="let g of watchable.genre_ids" class="badge border me-2 mt-2"> {{getCategory(g)}} </div>
+            </div>
+            <p [textContent]="watchable.overview" class="text-white px-3 pt-3 m-0"></p>          
+        </div>
+    </div>
+</section>

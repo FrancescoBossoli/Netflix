@@ -1,0 +1,21 @@
+<div class="container-fluid" *ngIf="loggedUser == undefined">
+    <h1 class="text-white text-center display-5 fw-semibold">Film, serie TV e tanto altro. <br>Senza limiti.</h1>
+    <h2 class="text-white text-center fs-4 fw-light my-3 pb-2">Guarda ciò che vuoi ovunque. Disdici quando vuoi.</h2>
+    <h4 class="text-white text-center fs-6 fw-light my-4">Vuoi guardare Netflix? Inserisci l'indirizzo email per abbonarti.</h4>
+    <form #emailForm="ngForm" (ngSubmit)="submit()">
+        <div >
+            <div id="mail" class="form-group mb-3 mx-auto d-flex align-items-center flex-column flex-lg-row">
+                <input type="email" name="email" class="form-control shadow-none text-secundary rounded-0 py-3" placeholder="Indirizzo email" aria-label="Indirizzo email" aria-describedby="basic-addon2" minlength="6" [class.is-invalid] ="emailRef.invalid && emailRef.touched" [(ngModel)]="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailRef="ngModel" required/>
+                <button class="btn text-white my-3 p-lg-3" id="basic-addon2">Inizia <i class="fa-solid fa-angle-right d-none d-sm-inline" type="submit"></i></button>
+            </div>            
+            <div *ngIf="(emailRef.invalid && emailRef.touched) || emailRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+                <small class="text-warning" *ngIf="!this.email">Il campo email è obbligatorio</small>
+                <small class="text-warning" *ngIf="emailRef.errors?.['pattern']">L'email non risulta formalmente corretta</small>
+            </div>            
+        </div>
+        
+    </form>
+</div>
+
+
+

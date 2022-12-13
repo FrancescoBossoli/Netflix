@@ -1,0 +1,16 @@
+.container-fluid {
+    height: 100%;
+}
+
+#mail, #mail input {
+    width:80%;
+    .btn {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .btn {
+        border-radius: 0;
+    }
+}

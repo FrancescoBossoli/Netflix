@@ -1,0 +1,17 @@
+.profile {
+        background-color: var(--bgDark);
+    &-container {
+        max-width: 980px;
+        margin: auto;
+        height: 700px;
+    }
+    &-section-title {
+        flex:1;
+        h3 {
+            color:var(--lightColor01);
+        }
+    }
+    &-section-info {
+        flex:2;
+    }
+}

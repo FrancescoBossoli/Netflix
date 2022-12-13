@@ -1,0 +1,22 @@
+.poster {
+    height: 184px;
+}
+
+.fa-heart {
+    position: relative;
+    top: -27px;
+    left: 7px;
+    font-size: 20px;
+}
+
+@media screen and (min-width:992px) {
+    .poster {
+        height: 212px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .poster {
+        height: 262px;
+    }
+}

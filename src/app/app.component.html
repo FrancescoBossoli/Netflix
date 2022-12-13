@@ -1,0 +1,41 @@
+<div id="main">
+    <section *ngIf="loggedUser == undefined">
+        <app-head></app-head>
+        <div id="main-content" class="d-flex justify-content-center align-items-center">
+        <router-outlet></router-outlet>
+    </div>
+    </section>
+    <section *ngIf="loggedUser != undefined">
+        <app-browse></app-browse>
+    </section>
+
+
+
+    <footer>
+        <div id="main-foot" class="mx-auto col-xl-8 p-5">
+            <div class="fs-6 col-12 px-3">
+                <p class="p-2">Domande?  Chiama <a href="tel:800-130-364" class="fs-6">800-130-364</a></p>
+            </div>
+            <div class="row align-items-center mx-0 gx-5">
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Domande Frequenti</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Centro Assistenza</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Account</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Media Center</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Rapporti con gli investitori</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Opportunità di lavoro</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Riscatta carte regalo</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Acquista carte regalo</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Come guardare Netflix</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Condizioni di utilizzo</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Privacy</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Preferenze per i cookie</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Informazioni sull&apos;azienda</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Contattaci</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Test di velocità</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Garanzia legale</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Note legali</a></div>
+                <div class="col-6 col-sm-4 col-md-3 d-flex wrap"><a href="#">Solo su Netflix</a></div>
+            </div>
+        </div>
+    </footer>
+</div>

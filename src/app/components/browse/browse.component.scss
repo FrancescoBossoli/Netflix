@@ -1,0 +1,115 @@
+.header {
+    position: relative;
+    margin-bottom: 6rem;
+    ul {
+        list-style: none;
+        gap:20px;
+        a {
+            width: fit-content;
+            color: #fff;
+            text-shadow: -1px 1px 1px #000, 1px -1px 1px #000;
+            font-size: 14px;
+            transition: all .2s ease;
+            &:hover {
+                color: var(--lightColor01);
+            }
+        }
+    }
+    &-body {
+        background-color: #1d1d1d;
+        height: 100%;
+    }
+    &-banner{
+        background-position: top right;
+        background-size: cover;
+        position: absolute;
+        height: 80vh;
+        top:0;
+        left:0;
+        h2 {
+            font-size:6rem;
+            margin: 8rem 3rem 6rem;
+            color: #ffc107;
+            text-shadow: -3px 0px 165px #fff, 0 0 25px #00f, 1px -3px 10px #000;
+            font-family: 'Allison', cursive;
+        }
+        button {
+            gap: 10px;
+            font-size: 20px;
+            padding: 15px 40px;
+            border-radius: 4px;
+            outline: none;
+            border: none;
+            i {
+                transform: scale(1.25);
+            }
+        }
+        .more-button {
+            background-color: #707070bb;
+        }
+    }
+    &-main {
+        position:fixed;
+        padding: 20px;
+        z-index: 1;
+        top:0;
+        transition: all .3s ease-in;
+        &.sticky {
+            background-color: #0d0d0d8f;
+            z-index:3;
+        }
+    }
+    &-left {
+        flex: 3;
+        gap: 50px;
+        svg {
+            margin : 5px 40px auto;
+            width: 167px;
+            fill: var(--fireRed);
+        }
+        li.active a {
+            color: #fff;
+        }
+    }
+    &-right {
+        flex: 1;
+        margin-right: 20px;
+        i {
+            transform: scale(2);
+            margin-left:15px;
+        }
+    }
+}
+
+.body {
+    margin-top: 31.7rem;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+    position: relative;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.center, .content {
+    position:absolute;
+    top:45px;
+    right:0;
+}
+
+.content {
+    display:none;
+    width: 160px;
+    height: 95px;
+    background-color: #0d0d0d8f;
+}
+
+#userMenu:checked ~ a .content {
+    opacity:1;
+    display:block;
+}
+
+.fa-right-from-bracket {
+    padding-inline: 4px 6px;
+}

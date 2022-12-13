@@ -1,0 +1,39 @@
+<div class="page-container">
+  <form class="text-white mx-auto" #signupForm="ngForm" (ngSubmit)="onsubmit()">
+      <h1 class="fs-2 mb-4">Registrati</h1>
+      <div class="form-group mb-3 w-100">
+        <input name="name" required [(ngModel)]="name" id="name" type="text" #nameRef="ngModel">
+        <label for="name">Nome</label>
+        <div *ngIf="(nameRef.invalid && nameRef.touched) || nameRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+          <small class="text-warning text-center" *ngIf="!this.name">Questo è un campo obbligatorio</small>
+        </div>
+      </div>
+      <div class="form-group mb-3 w-100">
+        <input name="surname" required [(ngModel)]="surname" id="surname" type="text" #surnameRef="ngModel">
+        <label for="surname">Nome</label>
+        <div *ngIf="(surnameRef.invalid && surnameRef.touched) || surnameRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+          <small class="text-warning text-center" *ngIf="!this.surname">Questo è un campo obbligatorio</small>
+        </div>
+      </div>
+      <div class="form-group mb-3 w-100">
+        <input name="email" type="email" [class.is-invalid]="emailRef.invalid && emailRef.touched" [(ngModel)]="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailRef="ngModel" required>
+        <label>Email</label>
+        <div *ngIf="(emailRef.invalid && emailRef.touched) || emailRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+            <small class="text-warning text-center" *ngIf="!this.email">Questo è un campo obbligatorio</small>
+            <small class="text-warning text-center" *ngIf="emailRef.errors?.['pattern']">L'email non risulta formalmente corretta</small>
+        </div>
+      </div>
+      <div class="form-group mb-3 w-100">
+        <input ngModel name="password" type="password" [class.is-invalid] = "pswRef.invalid && pswRef.touched" [(ngModel)]="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" #pswRef="ngModel" required>
+        <label>Password</label>
+        <div *ngIf="(pswRef.invalid && pswRef.touched) || pswRef.dirty || this.failedAttempt == true" class="mx-auto d-flex align-items-center flex-column">
+            <small class="text-warning text-center" *ngIf="!this.password">Il campo password è obbligatorio</small>
+            <small class="text-warning text-center" *ngIf="pswRef.errors?.['pattern']">La password deve contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale</small>
+        </div>
+      </div>
+      <button type="submit" [disabled]="signupForm.invalid" class="btn w-100 text-white d-flex justify-content-center align-items-center my-5">Registrati
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+      </button>
+      <p class="captcha">Questa pagina è protetta da Google reCAPTCHA per garantire che tu non sia un bot. <a class="text-primary">Scopri di più.</a></p> <!---->
+  </form>
+</div>

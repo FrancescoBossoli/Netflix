@@ -1,0 +1,27 @@
+#main {
+    background-image: linear-gradient(var(--bgDark), var(--bgDark)), url('../assets/img/background.jpg');
+    overflow-x: hidden;
+    height:100vh;
+    &-content {
+        height: 800px;
+    }
+    &-foot {
+        max-width: 1000px;
+    }
+    footer {
+        width: 100%;
+        background-color: #000000cc;
+        p {
+            color: var(--lightColor01);
+        }
+        a {
+            @extend p;
+            text-decoration: none;
+            font-size:14px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
