@@ -1,24 +1,28 @@
+import { environment } from 'src/environments/environment';
+import { DeliverService } from './../../services/deliver.service';
 import { Favourite } from './../../interfaces/favourite.interface';
 import { AccessData } from './../../interfaces/access.interfaces';
-import { Component, ElementRef, HostListener, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Watchable } from 'src/app/interfaces/watchable.interface';
-import { User } from 'src/app/interfaces/user.interface';
 import { AccessService } from 'src/app/services/access.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Router } from '@angular/router';
+import { Genres } from 'src/app/interfaces/genres';
 
 @Component({
   selector: 'app-browse',
   templateUrl: './browse.component.html',
-  styleUrls: ['./browse.component.scss']
+  styleUrls: ['./browse.component.scss', '../watchable/watchable.component.scss']
 })
 export class BrowseComponent implements OnInit, OnDestroy {
 
-
   title:string = "";
+  overview:string = "";
+  genres:Genres[] = [];
+  genreIds:number[] = [];
+  voteAverage:number = 0;
   loggedUser!:AccessData|null;
-  user?:User;
   hidden = false;
   subscriptions: Subscription[] = [];
 
@@ -30,39 +34,59 @@ export class BrowseComponent implements OnInit, OnDestroy {
   latestReal:Watchable[] = [];
   cults:Watchable[] = [];
   tvSeries:Watchable[] = [];
-  originalMovies!:Watchable[];
-  popularMovies!:Watchable[];
-  topRatedMovies!:Watchable[];
-  trendingMovies!:Watchable[];
-  upcomingMovies!:Watchable[];
 
   @ViewChild('nav') header!: ElementRef;
   headerBackground!:string;
-  loadingScreen:string = 'https://mobileinternist.com/wp-content/uploads/2021/02/netflix-logo-android.jpg';
-  backgroundPath:string = 'https://www.themoviedb.org/t/p/original'; 
+  loadingScreen:string = 'https://mobileinternist.com/wp-content/uploads/2021/02/netflix-logo-android.jpg';    
 
-    
-
-  constructor(private accessSrv:AccessService, private movieSrv:MovieService, private router:Router) {
-    router.events.subscribe((data) => {
+  constructor(private accessSrv:AccessService, private movieSrv:MovieService, private deliverService:DeliverService, private router:Router) {
+    this.router.events.subscribe(() => {
       this.checkCurrentURL();
     });
   }
  
-
-  async ngOnInit(): Promise<void> {
-    await this.subscriptions.push(this.accessSrv.user$.subscribe(data => this.loggedUser = data));
-    await this.subscriptions.push(this.movieSrv.getLatest().subscribe(data => this.latest = data));
-    await this.subscriptions.push(this.movieSrv.getTrending().subscribe(data => {
-      data!= undefined ? this.trending = data : [];
-      this.trending[0].backdrop_path != undefined ? this.headerBackground = this.backgroundPath + this.trending[0].backdrop_path : this.loadingScreen;
-      this.trending[0].title != undefined ? this.title = this.trending[0].title : "";
+  ngOnInit(): void {
+    this.subscriptions.push(this.accessSrv.user$.subscribe({
+      next: data => this.loggedUser = data,
+      error: err => console.log("utente trovato in seguito")}));
+    this.subscriptions.push(this.movieSrv.getLatest().subscribe({
+      next: data => this.latest = data,
+      error: err => console.log(err)}));
+    this.subscriptions.push(this.movieSrv.getTrending().subscribe({
+      next:data => {
+        data!= undefined ? this.trending = data : [];
+        this.trending[0].backdrop_path != undefined ? this.headerBackground = environment.backgroundPath + this.trending[0].backdrop_path : this.loadingScreen;
+        this.trending[0].title != undefined ? this.title = this.trending[0].title : "";
+        this.trending[0].overview != undefined ? this.overview = this.trending[0].overview : "";
+        this.trending[0].vote_average != undefined ? this.voteAverage = this.trending[0].vote_average : "";
+        this.trending[0].genre_ids != undefined ? this.genreIds = this.trending[0].genre_ids : "";      
+      },
+      error: (err) => console.log(err)
     }));
-    await this.subscriptions.push(this.movieSrv.getPopular().subscribe(data => this.popular = data));   
-    await this.subscriptions.push(this.movieSrv.getTopRated().subscribe(data => this.topRated = data));
-    await this.subscriptions.push(this.movieSrv.getLatestReal().subscribe(data => this.latestReal = data));  
-    await this.subscriptions.push(this.movieSrv.getCults().subscribe(data => this.cults = data)); 
-    await this.subscriptions.push(this.movieSrv.getTvSeries().subscribe(data => this.tvSeries = data));
+    this.subscriptions.push(this.movieSrv.getPopular().subscribe({
+      next: data => this.popular = data,
+      error: (err) => console.log(err)
+    }));   
+    this.subscriptions.push(this.movieSrv.getTopRated().subscribe({
+      next: data => this.topRated = data,
+      error: (err) => console.log(err)
+    }));
+    this.subscriptions.push(this.movieSrv.getLatestReal().subscribe({
+      next: data => this.latestReal = data,
+      error: (err) => console.log(err)
+    }));  
+    this.subscriptions.push(this.movieSrv.getCults().subscribe({
+      next: data => this.cults = data,
+      error: (err) => console.log(err)
+    }));
+    this.subscriptions.push(this.movieSrv.getTvSeries().subscribe({
+      next: data => this.tvSeries = data,
+      error: (err) => console.log(err)
+    }));
+    this.subscriptions.push(this.movieSrv.getGenres().subscribe({
+      next: data => data!= undefined ? this.genres = data : console.log(data),
+      error: err => console.log(err)
+    }));
   }
 
   ngOnDestroy(): void {
@@ -70,23 +94,35 @@ export class BrowseComponent implements OnInit, OnDestroy {
   }
 
   checkCurrentURL():void {
-    const location = window.location.pathname;
-    if (location != "/") {
-      this.hidden = true;
-    } else {
-      this.hidden = false;
+    try {
+      const location = window.location.pathname;
+      if (location != "/") {
+        this.hidden = true;
+      } else {
+        this.hidden = false;
+      }
     }
+    catch(err) {
+      console.log(err)
+    }     
   }
 
   logout():void {
     this.accessSrv.logout();
   }
 
-  async func() {
-    console.log(this.latest);
-    console.log(this.loggedUser);
-    console.log(this.favourites);
-    console.log(this.header); 
+  passData() {    
+    this.deliverService.setTheme(this.cults, this. tvSeries, this.trending);
+  }
+
+  getCategory(genre:number):string {
+    let category = ""
+    for (let i = 0; i<this.genres.length; i++) {
+      if (this.genres[i].id == genre) {
+        category = this.genres[i].name;
+      }
+    }
+    return category;
   }
 
 }

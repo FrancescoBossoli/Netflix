@@ -25,8 +25,8 @@ export class PosterComponent implements OnInit {
 
   constructor(private movieSrv:MovieService, private accessSrv:AccessService, private deliverSrv:DeliverService) { }
 
-  async ngOnInit(): Promise<void> { 
-    await this.subscriptions.push(this.movieSrv.favourites$.subscribe(data => this.favourites = data));
+  ngOnInit():void { 
+    this.subscriptions.push(this.movieSrv.favourites$.subscribe(data => this.favourites = data));
     for (let i = 0; i < this.favourites!.length; i++) {
       if (this.favourites![i].movieId == this.watchable.id) {
         // this.heart.nativeElement.classList.toggle("text-white");

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, throwError, Observable } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';

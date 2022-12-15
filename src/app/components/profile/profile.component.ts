@@ -1,6 +1,6 @@
 import { AccessService } from 'src/app/services/access.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AccessData } from 'src/app/interfaces/access.interfaces';
 
 @Component({
@@ -8,7 +8,7 @@ import { AccessData } from 'src/app/interfaces/access.interfaces';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   loggedUser!:AccessData|null;
   subscriptions:Subscription[]=[];
@@ -17,6 +17,10 @@ export class ProfileComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.subscriptions.push(this.accessSrv.user$.subscribe(data => this.loggedUser = data));    
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.map(s => s.unsubscribe());
   }
 
   @ViewChild('email') email!:ElementRef;

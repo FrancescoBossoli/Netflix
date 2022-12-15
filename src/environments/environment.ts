@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiUrl: "http://localhost:4201",
   apiKey: "cdeff0f8f48e4e92d2817d7f0da9db18",
-  realApi: "https://api.themoviedb.org/3/"
+  realApi: "https://api.themoviedb.org/3/",
+  backgroundPath: 'https://www.themoviedb.org/t/p/original'
 };
 
 /*

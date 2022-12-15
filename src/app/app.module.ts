@@ -17,6 +17,7 @@ import { PosterComponent } from './components/poster/poster.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { WatchableComponent } from './components/watchable/watchable.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { WatchableComponent } from './components/watchable/watchable.component';
     PosterComponent,
     ProfileComponent,
     MoviesComponent,
-    WatchableComponent
+    WatchableComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

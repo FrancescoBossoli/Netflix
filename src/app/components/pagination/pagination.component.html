@@ -1,0 +1,99 @@
+<div class="header w-100 d-flex justify-content-between align-items-center">
+    <div class="header-banner w-100 d-flex flex-column justify-content-center"
+        [ngStyle]="{'background-image': 'url('+ backgroundPath + watchables[2].backdrop_path +'), linear-gradient(#000000cc,#00000050)','background-size':'cover'}">
+        <h2>{{watchables[2].title}}</h2>
+        <div class="header-buttons d-flex ms-4">
+            <label class="play-button d-flex align-items-center mx-2 btn bg-light" for="trailer-checkX">
+                <i class="fa-solid fa-play"></i>
+                <span>Riproduci</span>
+            </label>
+            <label class="more-button d-flex align-items-center text-white mx-2" for="info-checkX">
+                <i class="fa-regular fa-circle-info"></i>
+                <span>Altre Info</span>
+            </label>
+            <input type="checkbox" id="info-checkX" class="d-none">
+            <div class="info-popup rounded p-3">
+                <div class="d-flex justify-content-start">
+                    <div class="comp-rate d-flex flex-row-reverse align-items-center mb-2">
+                        <div><span class="score"></span></div>
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="(watchables[2].vote_average >= 9) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 8 && (watchables[2].vote_average < 9) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 7 && (watchables[2].vote_average < 8) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 6 && (watchables[2].vote_average < 7) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 5 && (watchables[2].vote_average < 6) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 4 && (watchables[2].vote_average < 5) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 3 && (watchables[2].vote_average < 4) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 2 && (watchables[2].vote_average < 3) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average >= 1 && (watchables[2].vote_average < 2) ? true:false">
+                        <input type="radio" class="rate m-0 border-0" name="rate"
+                            [checked]="watchables[2].vote_average > 0 && (watchables[2].vote_average < 1) ? true:false">
+                    </div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div *ngFor="let g of watchables[2].genre_ids" class="badge border me-2 my-2"> {{getCategory(g)}} </div>
+                </div>
+                <p class="text-white">{{watchables[2].overview}}</p>
+            </div>
+            <input type="checkbox" id="trailer-checkX" class="d-none">
+            <div class="trailer-popup">
+                <iframe *ngIf="type=='tv-series'" class="rounded" src="https://www.youtube.com/embed/22j8um1XOHE" title={{title}} frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe *ngIf="type=='movies'" class="rounded" src="https://www.youtube.com/embed/6Mvl_s-9clE" title={{title}} frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe *ngIf="type=='trending'" class="rounded" src="https://www.youtube.com/embed/h7Txf27FDAA" title={{title}} frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="body">
+    <app-slider *ngIf="type=='tv-series'" title="Azione &amp; Avventura" [watchables]="tvAdventure" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='tv-series'" title="Animazione" [watchables]="tvAnimation" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='tv-series'" title="Comedy" [watchables]="tvComedy" [loggedUser]="loggedUser" [type]="type"></app-slider>            
+    <app-slider *ngIf="type=='tv-series'" title="Crime" [watchables]="tvCrime" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='tv-series'" title="Drama" [watchables]="tvDrama" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='tv-series'" title="Mistery" [watchables]="tvMistery" [loggedUser]="loggedUser" [type]="type"></app-slider>   
+    <app-slider *ngIf="type=='tv-series'" title="Sci-fi &amp; Fantasy" [watchables]="tvScifiFantasy" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Azione" [watchables]="movieAction" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Avventura" [watchables]="movieAdventure" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Animazione" [watchables]="movieAnimation" [loggedUser]="loggedUser" [type]="type"></app-slider>            
+    <app-slider *ngIf="type=='movies'" title="Comedy" [watchables]="movieComedy" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Crime" [watchables]="movieCrime" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Drama" [watchables]="movieDrama" [loggedUser]="loggedUser" [type]="type"></app-slider>   
+    <app-slider *ngIf="type=='movies'" title="Family" [watchables]="movieFamily" [loggedUser]="loggedUser" [type]="type"></app-slider> 
+    <app-slider *ngIf="type=='movies'" title="Fantasy" [watchables]="movieFantasy" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Storia" [watchables]="movieHistory" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Horror" [watchables]="movieHorror" [loggedUser]="loggedUser" [type]="type"></app-slider>     
+    <app-slider *ngIf="type=='movies'" title="Mistery" [watchables]="movieMistery" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Romance" [watchables]="movieRomance" [loggedUser]="loggedUser" [type]="type"></app-slider>   
+    <app-slider *ngIf="type=='movies'" title="Sci-fi" [watchables]="movieScifi" [loggedUser]="loggedUser" [type]="type"></app-slider>           
+    <app-slider *ngIf="type=='movies'" title="Thriller" [watchables]="movieThriller" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <app-slider *ngIf="type=='movies'" title="Guerra" [watchables]="movieWar" [loggedUser]="loggedUser" [type]="type"></app-slider>
+    <div *ngIf="type=='trending'" class="d-flex flex-wrap w-100 justify-content-evenly mt-5">
+        <div *ngFor="let watchable of watchables" class="d-flex flex-wrap p-2">
+            <a [routerLink]="['/'+type+'/'+ watchable.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="passWatchable(watchable)">    
+                <img class="poster w-100" src="https://image.tmdb.org/t/p/w200{{watchable.poster_path}}" alt="{{watchable.title}}">            
+            </a>
+        </div> 
+    </div>
+    <div *ngIf="type=='favourites'" class="d-flex flex-wrap w-100 justify-content-evenly mt-5">
+        <div *ngFor="let watchable of favouriteWatchables" class="d-flex flex-wrap p-2">
+            <a [routerLink]="['/'+type+'/'+ watchable.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="passWatchable(watchable)">    
+                <img class="poster w-100" src="https://image.tmdb.org/t/p/w200{{watchable.poster_path}}" alt="{{watchable.title}}">            
+            </a>
+        </div> 
+    </div>
+             
+</div>    

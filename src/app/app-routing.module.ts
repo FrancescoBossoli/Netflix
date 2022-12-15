@@ -1,13 +1,11 @@
 import { MoviesComponent } from './components/movies/movies.component';
 import { WatchableComponent } from './components/watchable/watchable.component';
-import { Watchable } from './interfaces/watchable.interface';
-import { BrowseComponent } from './components/browse/browse.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationGuard } from './guards/authorization.guard';
 import { TokenInterceptor } from './security/token.interceptor';
@@ -42,11 +40,31 @@ const routes: Routes = [
   },
   {
     path: "tv-series",
-    component: BrowseComponent,
+    component: MoviesComponent,
     canActivate:[AuthorizationGuard]
   },
   {
     path: "tv-series/:id",
+    component: WatchableComponent,
+    canActivate:[AuthorizationGuard]
+  },
+  {
+    path: "trending",
+    component: MoviesComponent,
+    canActivate:[AuthorizationGuard]
+  },
+  {
+    path: "trending/:id",
+    component: WatchableComponent,
+    canActivate:[AuthorizationGuard]
+  },
+  {
+    path: "favourites",
+    component: MoviesComponent,
+    canActivate:[AuthorizationGuard]
+  },
+  {
+    path: "favourites/:id",
     component: WatchableComponent,
     canActivate:[AuthorizationGuard]
   }

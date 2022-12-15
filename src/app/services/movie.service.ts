@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Watchable } from '../interfaces/watchable.interface';
 import { BehaviorSubject, catchError, Observable, tap, Subscription } from 'rxjs';
-import { Paths } from '../models/paths.enum';
 import { Favourite } from '../interfaces/favourite.interface';
 import { Genres } from '../interfaces/genres';
 
@@ -81,7 +80,10 @@ export class MovieService {
   }
 
   getAdditionalInfo(type:string, id:number) {
-    return this.http.get(environment.realApi + type + "/" + id + "?api_key=" + environment.apiKey + "&language=it&append_to_response=videos")
+    if (type == "tv-series") {
+      type = "tv";
+    }
+    return this.http.get<any>(environment.realApi + type + "/" + id + "?api_key=" + environment.apiKey + "&language=it&append_to_response=videos")
   }
 
   getGenres() {

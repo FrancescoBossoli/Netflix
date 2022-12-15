@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
       try {
         const subscription$ = this.accessSrv.signup(this.form.value);
         let data = await lastValueFrom(subscription$) as AccessData;
-        
+        console.log(data)
         this.router.navigate(['/'])
         this.isLoading=false
       } catch (error) {
